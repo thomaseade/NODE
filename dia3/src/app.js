@@ -8,7 +8,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-let book = new Book(1, 1, "Harry Potter", "Fiction", "J.K. Rowling", 19.99, "harry_potter.jpg");
+let book = new Book(1, 1, "Codenotch", "Terror", "Dani", 19.99, "fotito.jpg");
 
 app.get('/book', (req, res) => {
   if (book) {
@@ -33,7 +33,7 @@ app.put('/book', (req, res) => {
   const { id_book, id_user, title, type, author, price, photo } = req.body;
 
   if (book) {
-    const updatedFields = {}; // Objeto para almacenar los campos actualizados
+    const updatedFields = {}; 
 
     if (id_book !== undefined) {
       book.id_book = id_book;
