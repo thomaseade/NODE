@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
 
 
@@ -8,12 +8,6 @@ app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
 
-
-
-
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
 
 app.use((req, res, next) => {
   console.log("Petición recibida del cliente");
@@ -36,9 +30,4 @@ app.get('/', (req, res) => {
 
 app.get('/bye', (req, res) => {
   res.status(200).json({ ok: true, message: "Adios!" });
-});
-
-
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
