@@ -39,23 +39,23 @@ const addBook = (req, res) => {
 
 
 const updateBook = (req, res) => {
-    const { id } = req.params;
-    const { id_book, id_user, title, type, author, price, photo } = req.body;
-    const bookIndex = books.findIndex(book => book.id_book === parseInt(id));
-    if (bookIndex !== -1) {
-      const updatedBook = new Book(id_book, id_user, title, type, author, price, photo);
-      books[bookIndex] = updatedBook;
-      res.json(updatedBook);
-    } else {
-      res.status(404).json({ error: true, message: "Book not found" });
-    }
-  };
+  const { id_book, id_user, title, type, author, price, photo } = req.body;
+  const bookIndex = books.findIndex(book => book.id_book === id_book);
+  if (bookIndex !== -1) {
+    const updatedBook = new Book(id_book, id_user, title, type, author, price, photo);
+    books[bookIndex] = updatedBook;
+    res.json(updatedBook);
+  } else {
+    res.status(404).json({ error: true, message: "Book not found" });
+  }
+};
+
   
 
 
-const deleteBook = (req, res) => {
-    const { id } = req.params;
-    const bookIndex = books.findIndex(book => book.id_book === parseInt(id));
+  const deleteBook = (req, res) => {
+    const { id_book } = req.body;
+    const bookIndex = books.findIndex(book => book.id_book === id_book);
     if (bookIndex !== -1) {
       books.splice(bookIndex, 1);
       res.send('Book deleted');
@@ -63,7 +63,6 @@ const deleteBook = (req, res) => {
       res.status(404).json({ error: true, message: "Book not found" });
     }
   };
-
 
 
 module.exports = {
