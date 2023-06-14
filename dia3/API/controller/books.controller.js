@@ -18,7 +18,7 @@ const getBooks = (req, res) => {
 
 const getBookById = (req, res) => {
     const { id } = req.params;
-    const book = books.find(book => book.id_book === parseInt(id));
+    const book = books.find(book => book.id === parseInt(id));
     if (book) {
       res.json(book);
     } else {
@@ -29,33 +29,29 @@ const getBookById = (req, res) => {
 
 
 const addBook = (req, res) => {
-  const { id_book, id_user, title, type, author, price, photo } = req.body;
-  const newBook = new Book(id_book, id_user, title, type, author, price, photo);
+  const { id, id_user, title, type, author, price, photo } = req.body;
+  const newBook = new Book(id, id_user, title, type, author, price, photo);
   books.push(newBook);
   res.json(newBook);
 };
  
 
-
-
 const updateBook = (req, res) => {
-  const { id_book, id_user, title, type, author, price, photo } = req.body;
-  const bookIndex = books.findIndex(book => book.id_book === id_book);
+  const { id_user, title, type, author, price, photo } = req.body;
+  const bookIndex = books.findIndex(book => book.id === parseInt(req.params.id));
   if (bookIndex !== -1) {
-    const updatedBook = new Book(id_book, id_user, title, type, author, price, photo);
+    const updatedBook = new Book(parseInt(req.params.id), id_user, title, type, author, price, photo);
     books[bookIndex] = updatedBook;
     res.json(updatedBook);
   } else {
     res.status(404).json({ error: true, message: "Book not found" });
   }
 };
-
-  
-
+ 
 
   const deleteBook = (req, res) => {
-    const { id_book } = req.body;
-    const bookIndex = books.findIndex(book => book.id_book === id_book);
+    const { id } = req.body;
+    const bookIndex = books.findIndex(book => book.id === id);
     if (bookIndex !== -1) {
       books.splice(bookIndex, 1);
       res.send('Book deleted');
