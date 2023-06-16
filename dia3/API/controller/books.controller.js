@@ -70,20 +70,17 @@ const updateBook = (req, res) => {
  
 
   const deleteBook = (req, res) => {
-    const id = 1;
-    console.log (id);
- 
-
+   
     for (let index = 0; index < books.length; index++) {
 
-      if (id == books[index].id) {
+      if (req.body.id_book == books[index].id) {
      console.log("frase")
         books.splice(index,1);
 
       }
     }
 
-  res.send("libro borrado");
+  res.send({mensaje: "libro borrado"});
 
   };
 
